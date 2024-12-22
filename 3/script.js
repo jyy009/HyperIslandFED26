@@ -53,11 +53,14 @@ document.addEventListener("DOMContentLoaded", function () {
     labelElement.forEach((label) => {
       label.style.width = "100%";
       label.style.fontFamily = "var(--main-font)";
+      label.style.marginBottom = "10px";
     });
   };
 
   //style form
   form.style.width = "100%";
+  form.style.display = "flex";
+  form.style.flexDirection = "column";
 
   //style inputs
   const styleInput = () => {
@@ -85,7 +88,29 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   };
 
-  //style button
+  //style radio buttons
+  const styleRadios = () => {
+    const radiosInputs = form.querySelectorAll('input[type="radio"]');
+    const firstLabel = form.querySelector("label:nth-of-type(6)");
+    console.log(firstLabel);
+    firstLabel.style.fontFamily = "var(--main-font)";
+
+    radiosInputs.forEach((radio) => {
+      const label = radio.nextElementSibling;
+      const container = document.createElement("div");
+
+      container.style.display = "flex";
+      container.style.alignItems = "center";
+      container.style.gap = "10px";
+      label.style.fontFamily = "var(--main-font)";
+
+      radio.parentNode.insertBefore(container, radio);
+      container.appendChild(radio);
+      container.appendChild(label);
+    });
+  };
+
+  //style submit button
   const submitButton = document.querySelector(".input-button");
   console.log(submitButton);
   submitButton.style.minWidth = "50%";
@@ -97,4 +122,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
   styleLabel();
   styleInput();
+  styleRadios();
 });
